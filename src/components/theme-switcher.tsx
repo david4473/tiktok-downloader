@@ -43,8 +43,6 @@ export function ThemeSwitcher() {
   useEffect(() => {
     if (!mounted) return;
 
-    const isDark = resolvedTheme === "dark";
-
     // Extract base theme name (remove -dark suffix if present)
     let baseTheme = theme || "pink";
     if (baseTheme.endsWith("-dark")) {

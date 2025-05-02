@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ToastAction } from "@/components/ui/toast";
 import { downloadTikTokVideo } from "@/lib/tiktok-api";
-import { toast } from "./use-toast";
+import Image from "next/image";
+import { toast } from "@/hooks/use-toast";
 
 export default function VideoDownloader() {
   const [url, setUrl] = useState("");
@@ -96,9 +97,11 @@ export default function VideoDownloader() {
           <div className="rounded-lg border p-4">
             <div className="mb-4 grid gap-4 sm:grid-cols-2">
               <div>
-                <img
+                <Image
                   src={videoData.thumbnail || "/placeholder.svg"}
                   alt="Video thumbnail"
+                  width={500}
+                  height={500}
                   className="h-auto w-full rounded-lg object-cover"
                 />
               </div>

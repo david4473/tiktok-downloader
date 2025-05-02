@@ -40,7 +40,7 @@ export default function Home() {
               <h3 className="mb-2 text-xl font-semibold">Paste the Link</h3>
               <p className="text-muted-foreground">
                 Paste the TikTok video link in the input field above and click
-                the "Download" button.
+                the &quot;Download&quot; button.
               </p>
             </div>
             <div className="rounded-lg bg-card p-6 shadow-md">
