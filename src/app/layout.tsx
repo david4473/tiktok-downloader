@@ -8,7 +8,10 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL("https://www.tiktoktodown.com/"),
+  icons: {
+    icon: "/icon.svg",
+  },
   title: {
     default: "TikTok Video Downloader",
     template: "%s | TikTok Video Downloader",
@@ -21,9 +24,9 @@ export const metadata: Metadata = {
     "download tiktok videos",
     "tiktok without watermark",
   ],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
-  publisher: "Your Company",
+  authors: [{ name: "enigmae" }],
+  creator: "enigmae",
+  publisher: "enigmae inc",
   formatDetection: {
     email: false,
     address: false,
