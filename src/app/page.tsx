@@ -1,12 +1,8 @@
 import VideoDownloader from "@/components/video-downloader";
-import Header from "./header";
-import Footer from "./footer";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/50">
-      <Header />
-
       <main className="container mx-auto px-4 py-12">
         <section className="mb-16 text-center">
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
@@ -102,8 +98,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

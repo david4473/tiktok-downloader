@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Mail, MessageSquare, Send } from "lucide-react";
+import { Mail, MessageSquare, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,14 +20,6 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-12">
-      <Link
-        href="/"
-        className="mb-8 flex items-center gap-2 text-sm hover:underline"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to Home
-      </Link>
-
       <div className="mx-auto max-w-3xl">
         <h1 className="mb-8 text-3xl font-bold">Contact Us</h1>
 

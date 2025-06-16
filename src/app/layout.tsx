@@ -7,11 +7,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
+import Header from "../components/header";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.tiktoktodown.com/"),
+  metadataBase: new URL("https://tiktoktodown.com/"),
   icons: {
     icon: "/icon.svg",
   },
@@ -67,7 +69,7 @@ export default function RootLayout({
               name: "TikTok Video Downloader",
               description:
                 "Free online tool to download TikTok videos without watermark in HD quality.",
-              url: "https://www.tiktoktodown.com/",
+              url: "https://tiktoktodown.com/",
               applicationCategory: "UtilityApplication",
               operatingSystem: "All",
               offers: {
@@ -99,7 +101,9 @@ export default function RootLayout({
             "orange-dark",
           ]}
         >
+          <Header />
           {children}
+          <Footer />
           <Analytics />
           <Toaster />
           <GoogleAnalytics gaId="G-YD0DXZEKFK" />
