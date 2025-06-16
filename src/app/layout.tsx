@@ -13,7 +13,7 @@ import Footer from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tiktoktodown.com/"),
+  metadataBase: new URL("https://www.tiktoktodown.com/"),
   icons: {
     icon: "/icon.svg",
   },
@@ -69,7 +69,7 @@ export default function RootLayout({
               name: "TikTok Video Downloader",
               description:
                 "Free online tool to download TikTok videos without watermark in HD quality.",
-              url: "https://tiktoktodown.com/",
+              url: "https://www.tiktoktodown.com/",
               applicationCategory: "UtilityApplication",
               operatingSystem: "All",
               offers: {
