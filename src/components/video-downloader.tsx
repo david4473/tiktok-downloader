@@ -15,11 +15,14 @@ import { toast } from "@/hooks/use-toast";
 export default function VideoDownloader() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [videoData, setVideoData] = useState<{
-    videoUrl: string;
-    thumbnail: string;
-    title: string;
-  } | null>(null);
+  const [videoData, setVideoData] = useState<
+    | {
+        videoUrl: string[] | undefined;
+        thumbnail: string;
+        title: string;
+      }
+    | undefined
+  >(undefined);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +49,8 @@ export default function VideoDownloader() {
     try {
       const data = await downloadTikTokVideo(url);
       setVideoData(data);
+      console.log(data);
+
       toast({
         title: "Success!",
         description: "Video found and ready to download",
@@ -75,9 +80,9 @@ export default function VideoDownloader() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setUrl(e.target.value)
               }
-              className="flex-1"
+              className="py-5 border-gray-400"
             />
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading} className="py-5">
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -112,13 +117,12 @@ export default function VideoDownloader() {
                   </h3>
                 </div>
                 <div className="space-y-2">
-                  <Button
-                    className="w-full"
-                    onClick={() => window.open(videoData.videoUrl, "_blank")}
-                  >
-                    <Download className="mr-2 h-4 w-4" />
-                    Download Video
-                  </Button>
+                  <a download href={videoData.videoUrl?.[0] || "#"}>
+                    <Button className="w-full">
+                      <Download className="mr-2 h-4 w-4" />
+                      Download Video
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
