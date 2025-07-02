@@ -70,7 +70,7 @@ export default function VideoDownloader() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Card className="p-6">
+      <Card className="p-6 border-gray-300">
         <form onSubmit={handleSubmit} className="mb-6 space-y-4">
           <div className="flex flex-col gap-2 sm:flex-row">
             <Input
