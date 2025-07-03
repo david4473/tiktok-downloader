@@ -49,7 +49,6 @@ export default function VideoDownloader() {
     try {
       const data = await downloadTikTokVideo(url);
       setVideoData(data);
-      console.log(data);
 
       toast({
         title: "Success!",

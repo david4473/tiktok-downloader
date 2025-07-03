@@ -11,8 +11,6 @@ export async function downloadTikTokVideo(url: string) {
       body: JSON.stringify({ url }),
     });
 
-    console.log(BASE_URL);
-
     const data = await response.json();
 
     return {
