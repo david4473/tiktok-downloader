@@ -1,8 +1,9 @@
 // This is a simplified example. In a real application, you would need to implement
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function downloadTikTokVideo(url: string) {
   try {
-    const response = await fetch("/api/downloader", {
+    const response = await fetch(`${BASE_URL}/api/downloader`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

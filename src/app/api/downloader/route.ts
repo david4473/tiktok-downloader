@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error fetching TikTok video:", error);
+    console.error("Error:", error);
     return new Response(
       JSON.stringify({ error: "Failed to process the video" }),
       {
