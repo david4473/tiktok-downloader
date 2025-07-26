@@ -13,6 +13,9 @@ export async function downloadTikTokVideo(url: string) {
 
     const data = await response.json();
 
+    console.log(data.result, "data result");
+    console.log(data.version, "data version");
+
     return {
       videoUrl: data.video.downloadAddr,
       thumbnail: data.video.originCover[0],
