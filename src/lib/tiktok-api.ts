@@ -13,10 +13,6 @@ export async function downloadTikTokVideo(url: string) {
 
     const response = await req.json();
 
-    console.log(response);
-
-    console.log(response.result.result.video.playAddr[0]);
-
     if (response.version === "v1") {
       return {
         videoUrl: response.result.result.video.playAddr[0],
