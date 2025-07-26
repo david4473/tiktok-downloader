@@ -1,5 +1,4 @@
 import { Downloader } from "@tobyg74/tiktok-api-dl";
-import axios from "axios";
 
 async function tryDownloader(url: string, versions: string[]) {
   for (const version of versions) {
@@ -9,7 +8,7 @@ async function tryDownloader(url: string, versions: string[]) {
       });
 
       if (response.status === "success") {
-        return { result: response, version };
+        return { response, version };
       }
     } catch (error) {
       console.warn(`Downloader failed with version ${version}:`, error);
@@ -31,12 +30,12 @@ export async function POST(request: Request) {
   }
 
   try {
-    const downloader = await tryDownloader(url, ["v2", "v1"]);
+    const downloader = await tryDownloader(url, ["v1", "v2"]);
 
     return new Response(
       JSON.stringify({
         version: downloader?.version,
-        result: downloader?.result,
+        result: downloader?.response,
       }),
       {
         status: 200,

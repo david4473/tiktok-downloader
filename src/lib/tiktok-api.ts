@@ -3,7 +3,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function downloadTikTokVideo(url: string) {
   try {
-    const response = await fetch(`${BASE_URL}/api/downloader`, {
+    const req = await fetch(`${BASE_URL}/api/downloader`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -11,15 +11,32 @@ export async function downloadTikTokVideo(url: string) {
       body: JSON.stringify({ url }),
     });
 
-    const data = await response.json();
+    const response = await req.json();
 
-    console.log(data.result, "data result");
-    console.log(data.version, "data version");
+    console.log(response);
+
+    console.log(response.result.result.video.playAddr[0]);
+
+    if (response.version === "v1") {
+      return {
+        videoUrl: response.result.result.video.playAddr[0],
+        thumbnail: response.result.result.video.originCover[0],
+        title: "tiktoktodown - " + response.result.result.desc,
+      };
+    }
+
+    if (response.version === "v2") {
+      return {
+        videoUrl: response.result.result.video.playAddr[0],
+        thumbnail: response.result.result.author.avatar,
+        title: "tiktoktodown - " + response.result.result.desc,
+      };
+    }
 
     return {
-      videoUrl: data.video.downloadAddr,
-      thumbnail: data.video.originCover[0],
-      title: "tiktoktodown - " + data.author.dec,
+      videoUrl: response.video.downloadAddr,
+      thumbnail: response.video.originCover[0],
+      title: "tiktoktodown - " + response.author.dec,
     };
   } catch (error) {
     console.log("Error fetching TikTok video:", error);

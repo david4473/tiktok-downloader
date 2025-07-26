@@ -17,7 +17,7 @@ export default function VideoDownloader() {
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState<
     | {
-        videoUrl: string[] | undefined;
+        videoUrl: string;
         thumbnail: string;
         title: string;
       }
@@ -49,6 +49,7 @@ export default function VideoDownloader() {
     try {
       const data = await downloadTikTokVideo(url);
       setVideoData(data);
+      console.log("Video data:", data);
 
       toast({
         title: "Success!",
@@ -116,7 +117,7 @@ export default function VideoDownloader() {
                   </h3>
                 </div>
                 <div className="space-y-2">
-                  <a download href={videoData.videoUrl?.[0] || "#"}>
+                  <a download href={videoData.videoUrl || "#"}>
                     <Button className="w-full">
                       <Download className="mr-2 h-4 w-4" />
                       Download Video
