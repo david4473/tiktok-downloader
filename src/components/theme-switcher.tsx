@@ -44,7 +44,7 @@ export function ThemeSwitcher() {
     if (!mounted) return;
 
     // Extract base theme name (remove -dark suffix if present)
-    let baseTheme = theme || "pink";
+    let baseTheme = theme || "green";
     if (baseTheme.endsWith("-dark")) {
       baseTheme = baseTheme.replace("-dark", "");
     }
@@ -54,7 +54,7 @@ export function ThemeSwitcher() {
 
   // Handle theme changes
   const handleThemeChange = (themeValue: string) => {
-    const isDark = resolvedTheme === "dark";
+    const isDark = resolvedTheme?.endsWith("dark");
     const selectedTheme = themes.find((t) => t.value === themeValue);
 
     if (selectedTheme) {
@@ -64,7 +64,7 @@ export function ThemeSwitcher() {
 
   // Toggle between light and dark mode while preserving color theme
   const toggleMode = () => {
-    const isDark = resolvedTheme === "dark";
+    const isDark = resolvedTheme?.endsWith("dark");
     const selectedTheme =
       themes.find((t) => t.value === currentColorTheme) || themes[0];
 
@@ -80,7 +80,7 @@ export function ThemeSwitcher() {
     return null;
   }
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme?.endsWith("dark");
 
   return (
     <div className="flex items-center gap-2">
