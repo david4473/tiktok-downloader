@@ -11,8 +11,8 @@ export default function Header() {
           <h1 className="text-xl font-bold">TikTok Downloader</h1>
         </Link>
         <div className="flex items-center gap-4">
-          <nav>
-            <ul className="flex gap-4">
+          <nav className="hidden md:block">
+            <ul className=" flex gap-4">
               <li>
                 <Link href="/#how-it-works" className="text-sm hover:underline">
                   How It Works
