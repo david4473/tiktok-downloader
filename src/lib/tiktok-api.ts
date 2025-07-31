@@ -1,4 +1,5 @@
-// This is a simplified example. In a real application, you would need to implement
+"use server";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function downloadTikTokVideo(url: string) {
