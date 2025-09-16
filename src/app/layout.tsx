@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     icon: "/icon.svg",
   },
   title: {
-    default: "TikTok Video Downloader",
-    template: "%s | TikTok Video Downloader",
+    default: "TikTok Downloader - Download TikTok Video Without Watermark",
+    template: "%s - TikTok Video Downloader",
   },
   description:
-    "Free online tool to download TikTok videos without watermark in HD quality.",
+    "Save TikTok videos in HD with two taps, fast and free. With or without a watermark online – start now for high-quality downloads!",
   keywords: [
     "tiktok downloader",
     "tiktok video downloader",
@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
