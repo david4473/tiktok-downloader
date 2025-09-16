@@ -2,6 +2,9 @@
 
 import type React from "react";
 
+import fileDownload from "js-file-download";
+import axios from "axios";
+
 import { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,6 +26,23 @@ export default function VideoDownloader() {
       }
     | undefined
   >(undefined);
+
+  async function handleDownload() {
+    try {
+      const data = await downloadTikTokVideo(url);
+      const videoName = data?.title || "tiktoktodown-video.mp4";
+
+      axios
+        .get(data?.videoUrl, {
+          responseType: "blob",
+        })
+        .then((res) => {
+          fileDownload(res.data, `${videoName}.mp4`);
+        });
+    } catch (error) {
+      console.log("Error processing video with axios:", error);
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,12 +136,10 @@ export default function VideoDownloader() {
                   </h3>
                 </div>
                 <div className="space-y-2">
-                  <a download href={videoData.videoUrl || "#"}>
-                    <Button className="w-full">
-                      <Download className="mr-2 h-4 w-4" />
-                      Download Video
-                    </Button>
-                  </a>
+                  <Button className="w-full" onClick={handleDownload}>
+                    <Download className="mr-2 h-4 w-4" />
+                    Download Video
+                  </Button>
                 </div>
               </div>
             </div>
