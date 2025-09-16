@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms of Service for TikTok Video Downloader",
 };
 
 export default function TermsPage() {
