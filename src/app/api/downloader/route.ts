@@ -4,7 +4,7 @@ async function tryDownloader(url: string, versions: string[]) {
   for (const version of versions) {
     try {
       const response = await Downloader(url, {
-        version: version as "v1" | "v2",
+        version: version as "v1" | "v2" | "v3",
       });
 
       if (response.status === "success") {
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const downloader = await tryDownloader(url, ["v1", "v2"]);
+    const downloader = await tryDownloader(url, ["v1", "v2", "v3"]);
 
     return new Response(
       JSON.stringify({

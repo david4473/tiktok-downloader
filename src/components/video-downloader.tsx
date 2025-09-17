@@ -6,7 +6,13 @@ import fileDownload from "js-file-download";
 import axios from "axios";
 
 import { useState } from "react";
-import { Download, Loader2 } from "lucide-react";
+import {
+  Download,
+  ExternalLink,
+  Loader2,
+  MessageCircle,
+  ThumbsUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -15,25 +21,31 @@ import { downloadTikTokVideo } from "@/lib/tiktok-api";
 import Image from "next/image";
 import { toast } from "@/hooks/use-toast";
 
+interface VideoMeta {
+  username?: string;
+  title?: string;
+  videoUrl?: string;
+  thumbnail?: string;
+  statistics?: {
+    commentCount: number;
+    likeCount: number;
+    shareCount: number;
+  };
+  music?: string | undefined;
+  images?: string[];
+}
+
 export default function VideoDownloader() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [videoData, setVideoData] = useState<
-    | {
-        videoUrl: string;
-        thumbnail: string;
-        title: string;
-      }
-    | undefined
-  >(undefined);
+  const [videoData, setVideoData] = useState<VideoMeta | undefined>(undefined);
 
   async function handleDownload() {
     try {
-      const data = await downloadTikTokVideo(url);
-      const videoName = data?.title || "tiktoktodown-video.mp4";
+      const videoName = videoData?.title || "tiktoktodown-video.mp4";
 
       axios
-        .get(data?.videoUrl, {
+        .get(videoData?.videoUrl as string, {
           responseType: "blob",
         })
         .then((res) => {
@@ -68,6 +80,7 @@ export default function VideoDownloader() {
     setLoading(true);
     try {
       const data = await downloadTikTokVideo(url);
+
       setVideoData(data);
 
       toast({
@@ -129,13 +142,29 @@ export default function VideoDownloader() {
                   className="h-auto w-full rounded-lg object-cover"
                 />
               </div>
-              <div className="flex flex-col justify-between">
-                <div>
-                  <h3 className="mb-2 line-clamp-2 text-lg font-semibold">
-                    {videoData.title}
+              <div className="flex flex-col">
+                <div className="mb-4 text-left">
+                  <h3 className="mb-2 line-clamp-2 text-lg ">
+                    <span className="font-semibold">Username:</span> @
+                    {videoData?.username}
+                  </h3>
+                  <h3 className="mb-2 line-clamp-2 text-lg ">
+                    <span className="font-semibold">Desc:</span>{" "}
+                    {videoData.title}.
                   </h3>
                 </div>
-                <div className="space-y-2">
+                <div className="flex gap-4 justify-between mt-5">
+                  <p className="inline-flex items-center">
+                    <ThumbsUp /> {videoData.statistics?.likeCount}
+                  </p>
+                  <p className="inline-flex items-center">
+                    <MessageCircle /> {videoData.statistics?.commentCount}
+                  </p>
+                  <p className="inline-flex items-center">
+                    <ExternalLink /> {videoData.statistics?.shareCount}
+                  </p>
+                </div>
+                <div className="space-y-2 flex-1 flex flex-col justify-end mt-4">
                   <Button className="w-full" onClick={handleDownload}>
                     <Download className="mr-2 h-4 w-4" />
                     Download Video
