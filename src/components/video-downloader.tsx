@@ -11,7 +11,9 @@ import {
   ExternalLink,
   Loader2,
   MessageCircle,
+  Music,
   ThumbsUp,
+  Video,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,7 +42,7 @@ export default function VideoDownloader() {
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState<VideoMeta | undefined>(undefined);
 
-  async function handleDownload() {
+  async function handleDownloadVideo() {
     try {
       const videoName = videoData?.title || "tiktoktodown-video.mp4";
 
@@ -49,12 +51,38 @@ export default function VideoDownloader() {
           responseType: "blob",
         })
         .then((res) => {
-          fileDownload(res.data, `${videoName}.mp4`);
+          fileDownload(res.data, `tiktoktodown - ${videoName}.mp4`);
         });
     } catch (error) {
       console.log("Error processing video with axios:", error);
     }
   }
+
+  const handleDownloadMusic = async () => {
+    try {
+      const musicUrl = videoData?.music;
+      if (!musicUrl) {
+        toast({
+          title: "Error",
+          description: "No music URL available for this video.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const musicName = videoData?.title || "tiktoktodown-music.mp3";
+
+      axios
+        .get(musicUrl, {
+          responseType: "blob",
+        })
+        .then((res) => {
+          fileDownload(res.data, `${musicName}.mp3`);
+        });
+    } catch (error) {
+      console.log("Error processing music with axios:", error);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -155,19 +183,32 @@ export default function VideoDownloader() {
                 </div>
                 <div className="flex gap-4 justify-between mt-5">
                   <p className="inline-flex items-center">
-                    <ThumbsUp /> {videoData.statistics?.likeCount}
+                    <ThumbsUp size={"16px"} strokeWidth={"1px"} />{" "}
+                    <span className="text-sm font-medium">
+                      {videoData.statistics?.likeCount}
+                    </span>
                   </p>
                   <p className="inline-flex items-center">
-                    <MessageCircle /> {videoData.statistics?.commentCount}
+                    <MessageCircle size={"16px"} strokeWidth={"1px"} />{" "}
+                    <span className="text-sm font-medium">
+                      {videoData.statistics?.commentCount}
+                    </span>
                   </p>
                   <p className="inline-flex items-center">
-                    <ExternalLink /> {videoData.statistics?.shareCount}
+                    <ExternalLink size={"16px"} strokeWidth={"1px"} />{" "}
+                    <span className="text-sm font-medium">
+                      {videoData.statistics?.shareCount}
+                    </span>
                   </p>
                 </div>
                 <div className="space-y-2 flex-1 flex flex-col justify-end mt-4">
-                  <Button className="w-full" onClick={handleDownload}>
-                    <Download className="mr-2 h-4 w-4" />
+                  <Button className="w-full" onClick={handleDownloadVideo}>
+                    <Video className="mr-2 h-4 w-4" />
                     Download Video
+                  </Button>
+                  <Button className="w-full" onClick={handleDownloadMusic}>
+                    <Music className="mr-2 h-4 w-4" />
+                    Download Sound
                   </Button>
                 </div>
               </div>
